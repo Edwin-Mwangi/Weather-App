@@ -1,0 +1,10 @@
+body {
+    background: #eeeedc;
+    letter-spacing: .2 em;
+    font-family: 'Arial';
+    font-size: 0.2 em;
+}
+
+.container{
+    max-width: 400px;
+}

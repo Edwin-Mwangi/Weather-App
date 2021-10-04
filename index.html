@@ -3,6 +3,8 @@ key in the location and receive the weather of the area
 we are to use a free API known as accuweather api 
 this will enable us to query their api endpoints for weather info -->
 
+<!-- placeholder.com gives random images to use -->
+
 <!-- this project will have diff scripts coz we want to separate our logic -->
 
 <html lang="en">
@@ -15,6 +17,37 @@ this will enable us to query their api endpoints for weather info -->
     <title>Ninja Weather</title>
 </head>
 <body>
+
+    <div class="container my-5 mx-auto">
+        <h1 class ='text-muted text-center my-4'>Ninja Weather</h1><!-- textmuted makes test a little faded on the screen -->
+
+        <form class="change-location my-4 text-center text-muted">
+            <label for="city">Enter a location for Weather information</label>
+            <input type="text" name="city" class="form-control p-4">
+
+            <!-- placeholder.com random image -->
+        </form>
+
+        <div class="card shadow-lg rounded"><!-- largescreen shadow and rounded corners -->
+            <img src="https://via.placeholder.com/400x300" class="time card-img-top"><!-- card to style img and place it on top -->
+            <div class="icon bg-light mx-auto text-center">
+                <!-- icon -->
+
+            </div>
+            <div class="text-muted text-uppercase text-center details"><!-- details is our own class -->
+                <h5 class="my-4">City Name</h5>
+                <div class="my-4">Weather conditions</div>
+                <div class="display-4 my-4">
+                    <span>temp</span>
+                    <span>&deg;C</span><!-- &deg; used to get us the small 'o' in degrees   -->
+                </div><!-- display makes text larger -->
+
+            </div>
+
+        </div>
+    </div> 
+
+
     <script src="scripts/app.js"></script>
     <script src="scripts/forecast.js"></script>
 </body>
