@@ -19,7 +19,7 @@ const getCity = async (city) =>{
     const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
     const query = `?apikey=${key}&q=${city}`;
 
-    const response = await fetch (base + query); //+ add them together as single arg...returns a promise
+    const response = await fetch (base + query); //+ add them together as single arg(complete URL)...returns a promise
     const data = await response.json()  //json() method returns a promise...reason for another await
 
     //console.log(data);//...may return alot of cities with same names choose one u want from array
@@ -27,16 +27,16 @@ const getCity = async (city) =>{
     return data[0];
 }
 
-getCity('nairobi')
+/* getCity('nairobi')
     .then(data =>console.log('resolved', data)) 
-    .catch(err =>console.log('rejected', err));
+    .catch(err =>console.log('rejected', err)); */
 
 //...template strs offer more flexibility
 // '?' in a URL means that we are adding a query into the endpoint
 //& means it the next query param....all these stuff is seen inURL
 //copy the attributes as they are spelled in accuweather ie apikey and q(check accuweather City Search)
 //base is the general resource URL
-//the async above didn't have a param b4,we added it to use the city Loc as an arg that we canq uery in the templatestring....ie
+//the async above didn't have a param b4,we added it to use the city Loc as an arg that we can query in the templatestring....ie
 //instead of putting a permanent city in the string the city is put in by person using the func
 
 //once func is called the obj has a Key to be used in the next Phase
@@ -62,13 +62,14 @@ const getWeather = async (id) =>{
 
 //we could use getCity to call getWeather with the key returned from the city key in the func ie
 
-getCity('nairobi')
+/* getCity('nairobi')
     .then(data => {
         return getWeather(data.Key); //returns a promise so chaining .then
     }).then(data =>{
         console.log(data);
     }) 
-    .catch(err =>console.log('rejected', err));
+    .catch(err =>console.log('rejected', err)); */
 
 //we are calling getCity which return getWeather which when resolved a .then is called to console.log data from line 56...we could 
-//console.log the data out inside getWeather() func as an alternative to the .then
+//console.log the data out inside getWeather() func as an alternative to the .then.....then is also used after a promise is returned 
+//and get is an async func that returns a promise so when getWeather is returned u can do another .then
