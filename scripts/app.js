@@ -39,12 +39,16 @@ const updateUI = async (data) =>{
 const iconSrc = `img/icons/${weather.WeatherIcon}.svg`;    //icon no data is from the weatherIcon property
 icon.setAttribute('src', iconSrc);
 
-let timeSrc = null;     //used let coz it changes to svg
+/* let timeSrc = null;     //used let coz it changes to svg
 if(weather.IsDayTime){
     timeSrc = 'img/day.svg';
 }else{
     timeSrc = 'img/night.svg';
-}
+}  */
+
+// ternary operator alternative to above 
+// varName = condition?val1: val2;
+let timeSrc = weather.IsDayTime? 'img/day.svg' : 'img/night.svg';
 
 time.setAttribute('src', timeSrc);//img tag has a class of time linked...and we are setting src to the svgs
 

@@ -13,5 +13,5 @@ body {
     top: -50px;
     border-radius: 50%;
     width: 100px;
-    margin-bottom: -50px;
+    margin-bottom: -50px; /* to bring everything up as well */ 
 }
