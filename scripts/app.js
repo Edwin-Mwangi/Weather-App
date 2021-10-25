@@ -3,7 +3,10 @@ const cityForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
-const icon = document.querySelector('.icon img') 
+const icon = document.querySelector('.icon img')
+
+const forecast = new Forecast();//new class Instance 
+
 //update UI
 const updateUI = async (data) =>{
 
@@ -37,13 +40,6 @@ time.setAttribute('src', timeSrc);//img tag has a class of time linked...and we 
 };
 
 
-//updateCity func 
-const updateCity = async(city) => {
-    const cityDetails = await getCity(city);//func from forecast.js
-    const weather = await getWeather(cityDetails.Key);
-
-    return{cityDetails, weather}
-}; 
 
 //input form city submission
 cityForm.addEventListener('submit', e => {
@@ -53,8 +49,8 @@ cityForm.addEventListener('submit', e => {
     const city = cityForm.city.value.trim();
     cityForm.reset();
 
-    //update UI with that city...check updateCity func
-    updateCity(city)
+    //update UI with that city...check updateCity func....now stored in class Forecast
+    forecast.updateCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 
@@ -70,7 +66,7 @@ cityForm.addEventListener('submit', e => {
 if(localStorage.getItem('city')){
 
     //calling func and updating it with city
-    updateCity(localStorage.getItem('city')) //returns a promise so a .then update ui with that data
+    forecast.updateCity(localStorage.getItem('city')) //returns a promise so a .then update ui with that data
         .then( data => updateUI(data))
         .catch( err => console.log(err));
 };

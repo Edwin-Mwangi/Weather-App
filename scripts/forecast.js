@@ -1,31 +1,35 @@
 // for interacting with the weather API...for free accounts only 50 requests per day...
 
-//Api key
-const key = 'D8bGw3mx12SZo87n5MWtX0Nz1kGnDQhG';
+class Forecast{
+    constructor(){
+        this.key = 'D8bGw3mx12SZo87n5MWtX0Nz1kGnDQhG';
+        this.cityURI = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+        this.weatherURI = 'http://dataservice.accuweather.com/currentconditions/v1/';
+    }
 
-//GET CITY API CALL
+    async updateCity(city){
+        const cityDetails = await this.getCity(city);//func from forecast.js
+        const weather = await this.getWeather(cityDetails.Key);
 
-const getCity = async (city) =>{
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
-    const query = `?apikey=${key}&q=${city}`;
+        return{cityDetails, weather}
+    }
+    async getCity(city){
+        const query = `?apikey=${this.key}&q=${city}`;
+    
+        const response = await fetch (this.cityURI + query); //+ add them together as single arg(complete URL)...returns a promise
+        const data = await response.json()  //json() method returns a promise...reason for another await
+    
+        return data[0];
+    };
+    async getWeather(id){
 
-    const response = await fetch (base + query); //+ add them together as single arg(complete URL)...returns a promise
-    const data = await response.json()  //json() method returns a promise...reason for another await
+        //instead of putting key directly after resource URL do it in a query var
+        const query = `${id}?apikey=${this.key}`; 
 
-    return data[0];
-};
+        const response = await fetch(this.weatherURI + query);
+        const data = await response.json();
 
-//GET WEATHER API
+        return data[0];
 
-const getWeather = async (id) =>{
-    const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
-
-    //instead of putting key directly after resource URL do it in a query var
-    const query = `${id}?apikey=${key}`; 
-
-    const response = await fetch(base + query);
-    const data = await response.json();
-
-    return data[0];
-
+    };
 };
